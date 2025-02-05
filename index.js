@@ -167,3 +167,74 @@ function example2(){
     console.log(x);// prints 1
 }
 example2();
+
+//Object: An object in JavaScript is a collection of key-value pairs, where each key is a string and each value can be any valid JavaScript data type, including another object.  
+// Eg1:
+let user = {
+    Fname: "Jack",
+    age: 19,
+    placesVisited: ["Goa", "Mumbai", "Srinagar"]
+}
+console.log("The age of " + user.Fname + " is: " + user.age);
+console.log(user.Fname + " has visited " + user.placesVisited.length + " places: " + user.placesVisited);
+// Eg2:
+function greetings(user){
+    let fname = user.Fname;
+    let age = user.age;
+    let gender = user.gender;
+    let isMarried = user.isMarried;
+    // greet user
+    if(gender === "M"){
+        console.log("Hi Mr." + fname + " your age is: " + age);
+    }
+    else if(gender === "F" && isMarried === false){
+        console.log("Hi Ms." + fname + " your age is: " + age);
+    }
+    else{
+        console.log("Hi Mrs." + fname + " your age is: " + age);
+    }
+    // check if the user can vote
+    if(age>=18){
+        console.log("You can vote");
+    }
+    else{
+        console.log("You cannot vote");
+    }
+}
+greetings({Fname: "John",
+    age: 50,
+    gender: "M",
+    isMarried: true
+});
+greetings({Fname: "Julie",
+    age: 40,
+    gender: "F",
+    isMarried: true
+});
+greetings({Fname: "Jasy",
+    age: 15,
+    gender: "F",
+    isMarried: false
+});
+//Eg3: Array of objects:
+const users = [{
+    name: "Harkirat",
+    age: 21
+}, {
+    name: "raman",
+    age: 22
+}
+];
+
+console.log("Name: " + users[0].name + " Age:" + users[0].age);
+//Eg4: Object of Objects
+const user1 = {
+	Fname: "harkirat",
+	age: 19,
+	address: {
+		city: "Delhi",
+		country: "India",
+		address: "1122 DLF"
+	}
+}
+console.log("Name: " + user1.Fname + " Age: " + user1.age + " City: " + user1.address.city + " Country: " + user1.address.country + " Address: " + user1.address.address )
