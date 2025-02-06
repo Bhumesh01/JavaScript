@@ -25,7 +25,7 @@ console.log(number);
 let string = "Hello World";
 // Boolean
 let isActive = false;
-// Array: it is the collection of data items
+// Array: it is the collection of data items. it is resizable and can contain a mix of different datatypes.
 let numbers = [1, 2, 3]; // homogeneous
 numbers = [1, 'a', false, "Hello"]; // heterogeneous
 console.log(numbers);
@@ -238,3 +238,112 @@ const user1 = {
 	}
 }
 console.log("Name: " + user1.Fname + " Age: " + user1.age + " City: " + user1.address.city + " Country: " + user1.address.country + " Address: " + user1.address.address )
+
+// Array Properties: In JavaScript, arrays are special objects, but they work differently from regular objects when it comes to property names (or keys).JavaScript arrays use nonnegative integers (0, 1, 2, etc.) as valid indices. If you try to use a string (other than a string representation of a number), the array treats it as an object property, not an actual array index. Dot notation cannot be used when the property name starts with a number.
+years = [2020,2021,2022,2023,2024,2025];
+// 1. JavaScript allows accessing array elements using string representations of numbers (arr["2"] is treated as arr[2] ('2' is coerced to number)).
+console.log(years[2] === years['2']);
+// 2. However, arbitrary strings like "02" are treated as object properties, not array indices.
+console.log(years['2'] === years['02']);
+// 3. arr.push("elements"): used to added elements at the end of the arr
+//NOTE: JavaScript arrays behave more like hash maps (objects) where numeric indices are just keys. If the array is densely packed (like [1, 2, 3, 4]), JavaScript may optimize it to store elements contiguously. If the array has empty slots, JavaScript treats it as a sparse array, meaning it does not allocate memory for empty slots.
+years.push(2026, 2027);
+console.log(years);
+years[9] = 2029; 
+console.log(years[8]); // this is an empty slot. Empty slots do not exist in memory—JavaScript simply skips them.No address is allocated for them. If you explicitly assign undefined, then memory is allocated for that index. undefined is a stored value, while empty slots are just gaps in the array. Loops and operations behave differently for empty slots vs. undefined
+console.log(Object.keys(years));
+console.log(years.length);
+console.log(years);
+// 4.  A). Increasing the length extends the array by adding empty slots without creating any new elements — not even undefined.
+years.length = 15;
+console.log(years);
+console.log(years[12]);
+// B). Decreasing the length property does, however, delete elements.
+years.length = 2;
+console.log(years);
+console.log(Object.keys(years));
+console.log(years.length);
+console.log(typeof years);
+// 5. Associative Array Behavior: Indexed elements (years[0], years[1], etc.) contribute to length. Named properties (years["myKey"] = "value";) do not affect length because they are just additional properties on the array object.
+years["myKey"] = "value";
+console.log(years);
+console.log(years.length);
+// 6. at(): The at() method of Array instances takes an integer value and returns the item at that index, allowing for positive and negative integers. Negative integers count back from the last item in the array.
+years.push(2022, 2023 ,2024, 2025);
+console.log(years);
+console.log(years.at(2));
+console.log(years.at(-1));
+// 7. concat(): The concat() method of Array instances is used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array. Syntax: arr1.concat(arr2, arr3, ....);
+years_2 = [2018, 2019];
+years_3 = years_2.concat(years); // here it can be any number of arrays
+console.log(years_3);
+// 8.  fill(): The fill() method of Array instances changes all elements within a range of indices in an array to a static value. It returns the modified array. Syntax: arr.fill(value_to_fill, startingIndex, stoppingIndex); here starting index is included but ending index is not included.
+console.log(years.fill(2026, 1, 3));
+// 9. filter(): The filter() method of Array instances creates a shallow copy of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided function. Syntax: arr.filter(callbackFn);The filter() method is an iterative method. It calls a provided callbackFn function once for each element in an array, and constructs a new array of all the values for which callbackFn returns a truthy value. Array elements which do not pass the callbackFn test are not included in the new array. Thus the callbackFn must return either true or false value depending upon the condition
+// NOTE: A shallow copy of an object is a copy whose properties share the same references (point to the same underlying values) as those of the source object from which the copy was made. As a result, when you change either the source or the copy, you may also cause the other object to change too. That behavior contrasts with the behavior of a deep copy, in which the source and copy are completely independent.
+const words = ['spray', 'elite', 'exuberant', 'destruction', 'present'];
+const result = words.filter((word)=>word.length>6);
+console.log(result);
+console.log(([1, , , undefined, , , undefined].filter((element)=> element === undefined)).length)
+// the output of above code shows that the empty elements donot stores the value undefined
+// 10. find(): The find() method of Array instances returns the first element in the provided array that satisfies the provided testing function. If no values satisfy the testing function, undefined is returned.
+console.log(years.find((element)=>element>2026));
+console.log(years.indexOf(years.find((element)=>element>2021)));
+// 11. findLast(): The findLast() method of Array instances iterates the array in reverse order and returns the value of the first element that satisfies the provided testing function. If no elements satisfy the testing function, undefined is returned.
+console.log(years.findLast((element)=> element>2021))
+// 12. forEach(): The forEach() method of Array instances executes a provided function once for each array element. It has no affect on the original elements of the array.
+years.forEach((element)=>{
+    element += 1;
+    console.log(element);
+})
+console.log(years);
+// 13. join(): The join() method of Array instances creates and returns a new string by concatenating all of the elements in this array, separated by commas or a specified separator string. If the array has only one item, then that item will be returned without using the separator.
+const date = ["01", "04", "2005"];
+console.log(date.join("-"));
+// 14. keys(): The keys() method of Array instances returns a new array iterator object that contains the keys for each index in the array.
+// Note: 1. .keys() returns an iterator of only numeric indices. 2. One can use Object.keys() to get all property names (both numeric and object properties).
+console.log(years.keys());
+for( let key of years.keys()){
+    console.log(key);
+}
+// 15. map(): The map() method of Array instances creates a new array populated with the results of calling a provided function on every element in the calling array.
+const map1 = years.map((element)=> element-1);
+console.log(map1);
+console.log(years);
+// NOTE: forEach() => Purpose: The forEach() method is used to perform an operation on each element of an array. It does not return anything; it's used for side effects (e.g., modifying data or logging). Return Value: undefined. It doesn't return a new array. Use Case: When you want to perform an action on each element without needing a result (e.g., console logging, updating variables). map() => Purpose: The map() method is used to transform each element of an array into a new value and return a new array containing the results. Return Value: A new array where each element is the result of applying a function to the original array's elements. Use Case: When you want to transform elements of an array and get a new array with the transformed values.
+// 16. reduce(): The reduce() method of Array instances executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element. The final result of running the reducer across all elements of the array is a single value. The first time that the callback is run there is no "return value of the previous calculation". If supplied, an initial value may be used in its place. Otherwise the array element at index 0 is used as the initial value and iteration starts from the next element (index 1 instead of index 0).
+console.log(years.reduce((accumulator, currentValue)=>{
+    return accumulator + currentValue; // here, 0 is the accumulator and currentValue is 1
+}))
+console.log(years.reduce((accumulator, currentValue)=>{
+    return accumulator + currentValue;
+}, 7856)) // here, 7856 is the accumulator and currentValue is 0
+// 17. reverse(): The reverse() method of Array instances reverses an array in place and returns the reference to the same array, the first array element now becoming the last, and the last array element becoming the first. In other words, elements order in the array will be turned towards the direction opposite to that previously stated.
+console.log(years.reverse());
+// 18. shift(): The shift() method of Array instances removes the first element from an array and returns that removed element. This method changes the length of the array.
+console.log(years.shift());
+console.log(years.length);
+console.log(years);
+// 19. slice(): he slice() method of Array instances returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included) where start and end represent the index of items in that array. The original array will not be modified.
+console.log(years.slice(2));
+console.log(years.slice(2, -1));
+// 20. sort(): The sort() method of Array instances sorts the elements of an array in place and returns the reference to the same array, now sorted. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code unit values. Syntax: sort() or        
+// sort(compareFn): A function that determines the order of the elements. The function is called with the following arguments: a: The first element for comparison. Will never be undefined. b: The second element for comparison. Will never be undefined. The function should return a number where: A negative value indicates that a should come before b. A positive value indicates that a should come after b. Zero or NaN indicates that a and b are considered equal.
+console.log(years.sort()); // ascending order
+console.log(years);
+console.log(years.sort((a, b)=> b - a)) // descending order as if b-a>0 it means a will appear after b; if b-a<0 it means a will appear before b; if a-b===0 the order remains unchanged
+console.log(years);
+// 21. splice(): The splice() method of Array instances changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. Syntax: splice(start, deleteCount, item1, item2, /* …, */ itemN)
+const months = ['Jan', 'March', 'April', 'June'];
+months.splice(1, 0, 'Feb'); // inserting new element
+console.log(months);
+months.splice(1, 1); // deleting an element
+console.log(months);
+months.splice(3, 1, 'May' ); // replacing an element
+console.log(months);
+// 22. toString(): The toString() method of Array instances returns a string representing the specified array and its elements.
+const array1 = [1, 2, 'a', '1a'];
+console.log(array1.toString());
+// NOTE: Important: If the array has nested arrays, they will be converted to strings with their elements also separated by commas.
+let arr = [1, [2, 3], 4];
+console.log(arr.toString()); // "1,2,3,4"
