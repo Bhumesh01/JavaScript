@@ -168,7 +168,7 @@ function example2(){
 }
 example2();
 
-//Object: An object in JavaScript is a collection of key-value pairs, where each key is a string and each value can be any valid JavaScript data type, including another object.  
+//Object: An object in JavaScript is a collection of key-value pairs, where each key is a string and each value can be any valid JavaScript data type, including another object.  Nearly all objects in JavaScript are instances of Object; a typical object inherits properties (including methods) from Object.prototype, although these properties may be shadowed (a.k.a. overridden). 
 // Eg1:
 let user = {
     Fname: "Jack",
@@ -254,7 +254,7 @@ console.log(years[8]); // this is an empty slot. Empty slots do not exist in mem
 console.log(Object.keys(years));
 console.log(years.length);
 console.log(years);
-// 4.  A). Increasing the length extends the array by adding empty slots without creating any new elements — not even undefined.
+// 4.  A). Increasing the length extends the array by adding empty slots without creating any new elements — not even undefined. Such an array is called sparse array.
 years.length = 15;
 console.log(years);
 console.log(years[12]);
@@ -324,7 +324,7 @@ console.log(years.reverse());
 console.log(years.shift());
 console.log(years.length);
 console.log(years);
-// 19. slice(): he slice() method of Array instances returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included) where start and end represent the index of items in that array. The original array will not be modified.
+// 19. slice(): The slice() method of Array instances returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included) where start and end represent the index of items in that array. The original array will not be modified.
 console.log(years.slice(2));
 console.log(years.slice(2, -1));
 // 20. sort(): The sort() method of Array instances sorts the elements of an array in place and returns the reference to the same array, now sorted. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code unit values. Syntax: sort() or        
@@ -347,3 +347,32 @@ console.log(array1.toString());
 // NOTE: Important: If the array has nested arrays, they will be converted to strings with their elements also separated by commas.
 let arr = [1, [2, 3], 4];
 console.log(arr.toString()); // "1,2,3,4"
+
+// Mutable and Immutable: 
+/*
+Mutable: A mutable value is one that can be changed without creating an entirely new value, in comparison with immutable values.
+In JavaScript, objects and arrays are mutable by default — their properties and elements can be changed without creating a new object or array. 
+Immutable: An immutable value is one whose content cannot be changed without creating an entirely new value, in comparison with mutable values. In JavaScript, primitive values are immutable — once a primitive value is created, it cannot be changed, although the variable that holds it may be reassigned another value. The primitive data types includes: string, number, bigint, boolean, undefined, symbol, null.
+Eg: 
+*/
+// Any operation that appears to modify a string actually creates a new string instead of altering the original one.Methods like .slice(), .replace(), .toUpperCase() do not change the original string but return a new one. Strings are immutable → The actual string value cannot be changed after creation. Variables can be reassigned → A variable holding a string can point to a new string.
+let str = "Hello";
+str[0] = "J";  // This won't change the string
+console.log(str); // Output: "Hello"
+// Here, JavaScript does not allow modifying "Hello" directly. This proves immutability.
+str = "J" + str.slice(1); // Creates a new string "Jello"
+console.log(str); // Output: "Jello"
+//Here’s what’s happening: "J" + str.slice(1) creates a new string ("Jello"). The variable str is now assigned to this new string. The original "Hello" still exists in memory until garbage collection removes it.
+// Analogy: Imagine you write a word on a whiteboard with a marker. If you want to change a letter, you can simply erase and rewrite it (mutable—like arrays). But strings aren’t like that. Instead, they’re like sticky notes. Once you write something on a sticky note, you cannot erase or change the letters. If you want a different word, you write it on a new sticky note and throw away the old one.
+let myNumber = 12254;
+myNumber[2] = 1; // this too doesn't works
+console.log(myNumber); 
+// JavaScript is known for its "fail-silent" behavior in many cases. Instead of throwing an error, it just ignores the invalid operation. This prevents unnecessary crashes in code execution. JavaScript prioritizes flexibility over strictness.
+
+// Object Properties: 
+// 1. object.assign(): The Object.assign() static method copies all enumerable own properties from one or more source objects to a target object. It returns the modified target object.
+const target = {a: 1, b: 2};
+const source = {b: 4, c: 5};
+const returnedTarget = Object.assign(target, source);
+console.log(target, source, returnedTarget);
+console.log(returnedTarget===target);
