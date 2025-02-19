@@ -53,11 +53,18 @@ console.log(typeof null, typeof undefined, typeof typeof undefined, typeof typeo
 let test;
 console.log(test); // undefined
 console.log(typeof test === "undefined", typeof test === undefined); // first is true and second is false because typeof always results into string, and also a is uninitialized so its answer is: "undefined"
-
+console.log(null == 0) // o/p: false
 // Array: it is the collection of data items. it is resizable and can contain a mix of different datatypes.
 let numbers = [1, 2, 3]; // homogeneous
 numbers = [1, 'a', false, "Hello"]; // heterogeneous
 console.log(numbers);
+
+// Type Coercion: When an operator is applied to the “wrong” type of value, JavaScriptwill quietly convert that value to the type it needs, using a set of rules that often aren’t what you want or expect.
+console.log(8 * null); // o/p:  0
+console.log("5"- 1); // o/p:  4
+console.log("5" + 1); // o/p: 51
+console.log("five" * 2); // o/p: NaN as When something that doesn’t map to a number in an obvious way (such as "five" or undefined) is converted to a number, you get the value NaN.
+console.log(false == 0); // o/p: true
 
 //Operators in JS
 // 1. Arithmetic: +, -, *, /, %, **
