@@ -54,6 +54,11 @@ let test;
 console.log(test); // undefined
 console.log(typeof test === "undefined", typeof test === undefined); // first is true and second is false because typeof always results into string, and also a is uninitialized so its answer is: "undefined"
 console.log(null == 0) // o/p: false
+/*          Note: 
+1. null is an assigned value indicating "nothing"
+2. undefined is the default state of unassigned variables
+3. 0 is a number value
+4. "" (empty string) is a string value */
 // Array: it is the collection of data items. it is resizable and can contain a mix of different datatypes.
 let numbers = [1, 2, 3]; // homogeneous
 numbers = [1, 'a', false, "Hello"]; // heterogeneous
@@ -65,6 +70,41 @@ console.log("5"- 1); // o/p:  4
 console.log("5" + 1); // o/p: 51
 console.log("five" * 2); // o/p: NaN as When something that doesn’t map to a number in an obvious way (such as "five" or undefined) is converted to a number, you get the value NaN.
 console.log(false == 0); // o/p: true
+
+// Concept of truthy and falsy values: 
+/*
+In JavaScript, values are automatically converted to Boolean (true or false) when used in a Boolean context, like conditions in if statements or logical operations. This conversion follows specific rules that classify values as either "truthy" or "falsy".
+Falsy values - these evaluate to false when converted to a Boolean:
+false
+0 (zero)
+-0 (negative zero)
+0n (BigInt zero)
+"", '', `` (empty string)
+null
+undefined
+NaN (Not a Number)
+
+Truthy values - everything else evaluates to true, including:
+true
+Any number other than 0 (including negative numbers and Infinity)
+Any non-empty string ("0", "false", etc.)
+All objects and arrays (even empty ones like {} and [])
+All functions
+Symbols
+*/
+
+// Short-Circuiting of Logical operators: 
+// 1. using !! ie Logical OR: If left-side expession evaluates to a truthy value, the entire expression immediately returns that truthy value without evaluating right-side expression Only if left-side expession evaluates to a falsy value does JavaScript evaluate right-side expression
+console.log(null || "user"); // o/p: user as null is a falsy value so right side expression is returned
+console.log("user1" || "user2"); // o/p: user1 as left-side expression is a non-empty string so it is a truthy value.
+// 2.  The ?? operator resembles || but returns the value on the right only if the one on the left is null or undefined, not if it is some other value that can be converted to false. Often, this is preferable to the behavior of ||
+console.log(0 ?? "user"); // o/p: 0
+console.log(null ?? "user"); // o/p: user
+console.log(undefined ?? "user"); // o/p: user
+console.log("user1" ?? "user2"); // o/p: user1
+// 3. The && ie Logical AND: If left-side expression evaluates to a falsy value, the entire expression immediately returns that falsy value without evaluating right-side expression Only if left-side expression evaluates to a truthy value does JavaScript evaluate right-side expression
+console.log(null && "user"); // o/p: null as null is a falsy value so left side expression is returned
+console.log("user1" && "user2"); // o/p: user2 as left-side expression is a non-empty string so it is a truthy value.
 
 //Operators in JS
 // 1. Arithmetic: +, -, *, /, %, **
