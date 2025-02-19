@@ -21,10 +21,39 @@ console.log(isStudent);
 let number = 42;
 number = 42.4251;
 console.log(number);
-// String
+//There are three special values in JavaScript that are considered numbers but don’t behave like normal numbers. They are: Infinity, -Infinity, NaN(Not a Number)
+console.log(Infinity *Infinity); 
+console.log(-Infinity *Infinity);
+console.log(Infinity/Infinity);
+console.log(0/0);
+console.log(Infinity-Infinity);
+console.log(NaN + 5);
+console.log(`Type of Infinity: ${typeof(Infinity)}, Type of -Infinity: ${typeof(-Infinity)}, Type of NaN: ${typeof(NaN)}`)
+// String:You can use single quotes, double quotes, or backticks to mark strings, as long as the quotes at the start and the end of the string match.
 let string = "Hello World";
+string = `Hello World`;
+string = 'Hello World';
+console.log("This is The first line \nThis is the second line"); // one can use backslash n to add new line in our string
+console.log( "A newline character is written like \"\\n\"."); // /" are used to add quotes in our string..however if two backslash follow each other they collapse together, and only one will be left in the resulting string value.
+//Unary operators: Not all operators are symbols. Some are written as words. One example is the typeof operator, which produces a string value naming the typeof the value you give it.
+console.log(typeof 4.5); // o/p: number
+console.log(typeof "x"); // o/p: string
+console.log(typeof typeof 5); // o/p: string
+console.log(typeof console.log(8)); // first 8 is logged and then undefined, typeof console.log() is undefined
+console.log(- (10- 2)) ; // -8...The minus operator (-) can be used both as a binary operator and as a unary operator.
 // Boolean
 let isActive = false;
+console.log("Z" > "a"); // o/p:  false as uppercase are always less than lowercase
+//There is only one value in JavaScript that is not equal to itself, and that is NaN (“not a number”).NaN is supposed to denote the result of a nonsensical computation, and as such, it isn’t equal to the result of any other nonsensical computations.
+console.log(NaN === NaN); // o/p: false
+//Empty values: There are two special values, written null and undefined, that are used to denote the absence of a meaningful value. They are themselves values, but they carry no information. Many operations in the language that don’t produce a meaningful value yield undefined simply because they have to yield some value. The difference in meaning between undefined and null is an accident of JavaScript’s design, and it doesn’t matter most of the time.
+console.log(null == undefined); // o/p: true as they are both treated as "absence of value" and are loosely compared.
+console.log(null === undefined); // o/p: false as  both are not considered equal because they are of different types. null is an object, while undefined is a primitive value.
+console.log(typeof null, typeof undefined, typeof typeof undefined, typeof typeof null);
+let test;
+console.log(test); // undefined
+console.log(typeof test === "undefined", typeof test === undefined); // first is true and second is false because typeof always results into string, and also a is uninitialized so its answer is: "undefined"
+
 // Array: it is the collection of data items. it is resizable and can contain a mix of different datatypes.
 let numbers = [1, 2, 3]; // homogeneous
 numbers = [1, 'a', false, "Hello"]; // heterogeneous
@@ -93,6 +122,7 @@ console.log(add(55,100,45));
 // 9. Nullish Coalescing (??): Returns the right-hand value if the left-hand value is null or undefined.
 let username = null;
 console.log(username ?? "Guest");
+//  || has the lowest precedence, then comes &&, then the comparison operators (>, ==, and so on), and then the rest. 
 
 // Functions: They helps to implement a particular function. They help in code reusability.
 // Function declaration
@@ -370,7 +400,7 @@ console.log(myNumber);
 // JavaScript is known for its "fail-silent" behavior in many cases. Instead of throwing an error, it just ignores the invalid operation. This prevents unnecessary crashes in code execution. JavaScript prioritizes flexibility over strictness.
 
 // Object Properties: 
-// 1. object.assign(): The Object.assign() static method copies all enumerable own properties from one or more source objects to a target object. It returns the modified target object.
+// 1. object.assign(): The Object.assign() static method copies all enumerable own properties from one or more source objects to a target object. It returns the modified target object. Return value The target object. Properties in the target object are overwritten by properties in the sources if they have the same key.
 const target = {a: 1, b: 2};
 const source = {b: 4, c: 5};
 const returnedTarget = Object.assign(target, source);
